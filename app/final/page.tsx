@@ -1,20 +1,17 @@
-import FinalResults from '@/app/components/FinalResult';
+"use client";
 import { Suspense } from 'react';
+import FinalResults from '@/app/components/FinalResult';
 
-// Server Component
-export default async function FinalPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ winners?: string | string[] }>
-}) {
-  const params = await searchParams;
-  const winnerIds = Array.isArray(params.winners) 
-    ? params.winners[0]
-    : params.winners;
-
+export default function FinalPage() {
   return (
-    <Suspense fallback={<div>Loading results...</div>}>
-      <FinalResults winnerIds={winnerIds} />
-    </Suspense>
+    <div className="min-h-screen">
+      <Suspense fallback={<div className="text-center p-8">Loading results...</div>}>
+        <FinalResultsLoader />
+      </Suspense>
+    </div>
   );
+}
+
+function FinalResultsLoader() {
+  return <FinalResults />;
 }

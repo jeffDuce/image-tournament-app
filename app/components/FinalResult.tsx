@@ -1,45 +1,27 @@
-'use client';
-
+"use client";
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PAINT_OPTIONS, type PaintOption } from '@/app/utils/paintOptions';
 
-
-export default function FinalResults({ winnerIds }: { winnerIds?: string }) {
+export default function FinalResults() {
+  const searchParams = useSearchParams();
   const [winners, setWinners] = useState<PaintOption[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!winnerIds) {
-      console.error('No winner IDs provided');
-      setIsLoading(false);
-      return;
+    const winnerIds = searchParams?.get('winners');
+    if (winnerIds) {
+      try {
+        const parsed = JSON.parse(winnerIds);
+        const validWinners = parsed
+          .map((id: string) => PAINT_OPTIONS.find(img => img.id === id))
+          .filter((img: PaintOption | undefined): img is PaintOption => !!img);
+        setWinners(validWinners);
+      } catch (error) {
+        console.error('Error parsing winners:', error);
+      }
     }
-
-    try {
-      const parsedIds: string[] = JSON.parse(decodeURIComponent(winnerIds));
-      const validWinners = parsedIds
-        .map(id => PAINT_OPTIONS.find(img => img.id === id))
-        .filter((img): img is PaintOption => !!img);
-
-      setWinners(validWinners);
-    } catch (error) {
-      console.error('Error parsing winners:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [winnerIds]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Loading results...</h2>
-          <p>Please wait while we load the tournament results</p>
-        </div>
-      </div>
-    );
-  }
+  }, [searchParams]);
 
   // Update the validation check
   if (winners.length < 3) {
