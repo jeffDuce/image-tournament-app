@@ -130,39 +130,39 @@ export default function Comparison() {
   }
 
   return (
-    <div className="flex w-screen h-screen overflow-hidden">
-      {/* Left Image */}
+    <div className="flex flex-col md:flex-row w-screen h-screen overflow-hidden bg-gray-900">
+      {/* First Option */}
       <div 
-        className="w-1/2 h-full cursor-pointer hover:opacity-75 transition-opacity relative"
+        className="w-full md:w-1/2 h-[50vh] md:h-full cursor-pointer hover:opacity-75 transition-opacity relative bg-gray-900 flex items-center justify-center"
         onClick={() => handleChoice(currentPair[0])}
       >
         <Image
           src={currentPair[0]}
-          alt="Paint option 1"
+          alt="Option 1"
           fill
-          sizes="50vw"
-          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-contain"
           priority
         />
-        <div className="absolute bottom-0 left-0 p-2 bg-black bg-opacity-50 text-white">
+        <div className="absolute bottom-2 left-2 p-2 bg-gray-800 rounded-lg text-white text-sm shadow-lg">
           ID: {currentPair[0].id}
         </div>
       </div>
 
-      {/* Right Image */}
+      {/* Second Option */}
       <div 
-        className="w-1/2 h-full cursor-pointer hover:opacity-75 transition-opacity relative"
+        className="w-full md:w-1/2 h-[50vh] md:h-full cursor-pointer hover:opacity-75 transition-opacity relative bg-gray-900 flex items-center justify-center"
         onClick={() => handleChoice(currentPair[1])}
       >
         <Image
           src={currentPair[1]}
-          alt="Paint option 2"
+          alt="Option 2"
           fill
-          sizes="50vw"
-          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-contain"
           priority
         />
-        <div className="absolute bottom-0 left-0 p-2 bg-black bg-opacity-50 text-white">
+        <div className="absolute bottom-2 left-2 p-2 bg-gray-800 rounded-lg text-white text-sm shadow-lg">
           ID: {currentPair[1].id}
         </div>
       </div>
