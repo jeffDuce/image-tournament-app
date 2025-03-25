@@ -2,8 +2,6 @@
 
 A Next.js web application for running visual comparison tournaments between images. Users select their preferred option from pairs of images in successive rounds until a final winner is determined.
 
-![Demo Screenshot](./public/screenshot.png)
-
 ## Features
 
 - 🏆 **Tournament Bracket System**: Automatically generates elimination rounds
@@ -25,7 +23,7 @@ A Next.js web application for running visual comparison tournaments between imag
 
 1. Clone repository:
 ```bash
-git clone https://github.com/your-username/image-tournament.git
+git clone https://github.com/jeffDuce/image-tournament-app.git
 ```
 
 2. Install dependencies:
@@ -33,8 +31,8 @@ git clone https://github.com/your-username/image-tournament.git
 npm install
 ```
 
-3. Add your images to `/public/images` directory
-4. Configure images in `src/utils/paintOptions.ts`
+3. Add your images to `/public` directory
+4. Configure images in `app/utils/paintOptions.ts`
 5. Start development server:
 ```bash
 npm run dev
@@ -42,13 +40,13 @@ npm run dev
 
 ## Configuration
 
-Modify `src/utils/paintOptions.ts`:
+Modify `app/utils/paintOptions.ts`:
 ```typescript
 import { StaticImageData } from 'next/image';
 
 // Add your images
-import image1 from '../public/images/1.jpg';
-import image2 from '../public/images/2.jpg';
+import image1 from '../public/1.jpg';
+import image2 from '../public/2.jpg';
 
 export interface PaintOption {
   src: StaticImageData;
